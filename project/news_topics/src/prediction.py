@@ -13,32 +13,10 @@ with open(os.path.join(path, "models/tv.pkl"), "rb") as file:
 with open(os.path.join(path, "models/svm.pkl"), "rb") as file:
   svm = pickle.load(file)
 
-with open(os.path.join(path, "models/knn.pkl"), "rb") as file:
-  knn = pickle.load(file)
-
-with open(os.path.join(path, "models/bayes.pkl"), "rb") as file:
-  bayes = pickle.load(file)
-
 def svm_predict(text):
     token = prep(text)
     
     X = tv.transform([token]).toarray()
     result = svm.predict(X)
-
-    return topics[result[0]]
-
-def bayes_predict(text):
-    token = prep(text)
-    
-    X = tv.transform([token]).toarray()
-    result = bayes.predict(X)
-
-    return topics[result[0]]
-
-def knn_predict(text):
-    token = prep(text)
-    
-    X = tv.transform([token]).toarray()
-    result = knn.predict(X)
 
     return topics[result[0]]

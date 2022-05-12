@@ -41,61 +41,6 @@ def svm_predict():
 
         return "Error happen", 500
 
-@app.route("/knn", methods=["POST"])
-def knn_predict():
-    try:
-        news = request.json["news"][:max_length]
-
-        start = time.time_ns()
-
-        result = pre.knn_predict(news)
-
-        print(result)
-
-        end = time.time_ns()
-
-        # to ms
-        exec_time = f"{str((end-start)/pow(10, 6))} ms"
-
-        return {
-            "time": str(exec_time),
-            "result": result
-        }
-    except Exception as e:
-        print(e)
-
-        return "Error happen", 500
-
-@app.route("/bayes", methods=["POST"])
-def bayes_predict():
-    try:
-        news = request.json["news"][:max_length]
-
-        start = time.time_ns()
-
-        result = pre.bayes_predict(news)
-
-        print(result)
-
-        end = time.time_ns()
-
-        # to ms
-        exec_time = f"{str((end-start)/pow(10, 6))} ms"
-
-        return {
-            "time": str(exec_time),
-            "result": result
-        }
-    except Exception as e:
-        print(e)
-
-        return "Error happen", 500
-
-@app.route("/phoBert", methods=["POST"])
-def phoBERT():
-    print(request.json)
-    return {}
-
 if os.environ.get("PORT") is None:
  os.environ["PORT"] = "80"
 
